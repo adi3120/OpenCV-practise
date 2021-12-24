@@ -1,0 +1,45 @@
+import cv2 as cv
+import numpy as np 
+
+#1. Translate function
+
+def translate(img,x,y):
+	transmat=np.float32([[1,0,x],[0,1,y]])
+	dimentions=(img.shape[0],img.shape[1])
+	return cv.warpAffine(img,transmat,dimentions)
+
+
+#2. Rotate function
+
+def rotate(img,angle,rotPoint=None):
+	(height,width)=img.shape[:2]
+	if rotPoint is None:
+		rotPoint=(width//2,height//2)
+	rotMat=cv.getRotationMatrix2D(rotPoint,angle,1.0)
+	dimentions=(width,height)
+	return cv.warpAffine(img,rotMat,dimentions)
+
+
+#3. Resizing image
+
+orgimg=cv.imread('images/house.jpg')
+img=cv.resize(orgimg,(500,500),interpolation=cv.INTER_CUBIC)
+cv.imshow('House',img)
+
+transImg=translate(img,img.shape[0]//2,img.shape[1]//2)
+cv.imshow('House translated',transImg)
+
+rotImg=rotate(img,45)
+cv.imshow('House rotated',rotImg)
+
+
+#4. flip
+
+for i in range(-1,2):
+	stri=str(i)
+	flip=cv.flip(img,i)
+	a='flipped image '+stri
+	cv.imshow(a,flip)
+
+
+cv.waitKey(0)
