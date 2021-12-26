@@ -7,6 +7,7 @@ for i in os.listdir(r'E:\pythons\images\train'):
 	people.append(i)
 
 DIR=r'E:\pythons\images\train'
+
 face_cascade = cv.CascadeClassifier(cv.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 features=[]
@@ -42,7 +43,6 @@ face_recognizer=cv.face.LBPHFaceRecognizer_create()
 face_recognizer.train(features,labels)
 face_recognizer.save('face_trained.yml')
 	
-
 np.save('features.npy',features)
 np.save('labels.npy',labels)
 

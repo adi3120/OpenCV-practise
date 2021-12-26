@@ -1,7 +1,7 @@
 import cv2 as cv
 import numpy as np
 
-path='images/house.jpg'
+path='images/car.jpg'
 
 cv.namedWindow('TrackBars')
 cv.resizeWindow('TrackBars',640,240)
@@ -9,10 +9,10 @@ cv.resizeWindow('TrackBars',640,240)
 def empty(a):
 	pass
 cv.createTrackbar('Hue Min','TrackBars',0,179,empty)
-cv.createTrackbar('Hue Max','TrackBars',179,179,empty)
-cv.createTrackbar('Sat Min','TrackBars',0,255,empty)
+cv.createTrackbar('Hue Max','TrackBars',12,179,empty)
+cv.createTrackbar('Sat Min','TrackBars',34,255,empty)
 cv.createTrackbar('Sat Max','TrackBars',255,255,empty)
-cv.createTrackbar('Val Min','TrackBars',0,255,empty)
+cv.createTrackbar('Val Min','TrackBars',91,255,empty)
 cv.createTrackbar('Val Max','TrackBars',255,255,empty)
 
 while True:
@@ -34,7 +34,11 @@ while True:
 	cv.imshow('HSV',imgHSV)
 	cv.imshow('Original',img)
 	cv.imshow('Mask',mask)
+	cv.imshow('ColorPicked',imgResult)
 	
 	cv.waitKey(1)	
+
+cap.release()
+cv.destroyAllWindows()
 
 
